@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Door Is Open!</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 16px;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #17233f;
+      background: #ffffff;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 750px;
+      padding: 35px 24px;
+      text-align: center;
+      background: #fff;
+      animation: appear 0.9s ease;
+    }
+
+    .celebration {
+      font-size: 48px;
+      margin-bottom: 15px;
+      animation: bounce 2s infinite;
+    }
+
+    h1 {
+      font-size: clamp(34px, 7vw, 58px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+      color: #101d3b;
+    }
+
+    .description {
+      font-size: clamp(16px, 3vw, 21px);
+      color: #53627f;
+      line-height: 1.9;
+    }
+
+    .door-scene {
+      position: relative;
+      width: 290px;
+      height: 340px;
+      max-width: 90%;
+      margin: 30px auto 25px;
+      perspective: 1000px;
+    }
+
+    .door-frame {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      height: 315px;
+      border: 12px solid #a86636;
+      border-bottom: 0;
+      border-radius: 5px 5px 0 0;
+      background: linear-gradient(
+        180deg,
+        #8bd7ff 0%,
+        #fff1b9 55%,
+        #ffe3a0 100%
+      );
+      box-shadow:
+        0 0 25px rgba(255, 190, 75, 0.35),
+        inset 0 0 20px rgba(255, 255, 255, 0.7);
+    }
+
+    .landscape {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: linear-gradient(
+        #78d0ff 0%,
+        #fff0bc 55%,
+        #b7d77b 100%
+      );
+    }
+
+    .sun {
+      position: absolute;
+      width: 85px;
+      height: 85px;
+      top: 45px;
+      left: 45px;
+      border-radius: 50%;
+      background: #fff7c7;
+      box-shadow: 0 0 45px #fff1a4;
+    }
+
+    .mountains {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 58%;
+      background: linear-gradient(
+        140deg,
+        transparent 0 17%,
+        #9dc8d7 17% 31%,
+        #e7f1e6 31% 35%,
+        #77b78a 35% 51%,
+        #d0e59a 51% 65%,
+        #6eaa66 65%
+      );
+      clip-path: polygon(
+        0 50%, 20% 0, 34% 35%, 52% 5%,
+        72% 48%, 88% 22%, 100% 55%, 100% 100%, 0 100%
+      );
+    }
+
+    .path {
+      position: absolute;
+      bottom: 0;
+      left: 35%;
+      width: 35%;
+      height: 48%;
+      background: #fff1b7;
+      clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
+    }
+
+    .door {
+      position: absolute;
+      top: 5px;
+      left: 0;
+      width: 100%;
+      height: 310px;
+      transform-origin: left center;
+      transform: rotateY(-65deg);
+      transform-style: preserve-3d;
+      background: linear-gradient(
+        90deg,
+        #75401f,
+        #c08048 18%,
+        #a65e30 75%,
+        #6f351d
+      );
+      border: 5px solid #9a592f;
+      border-radius: 3px;
+      box-shadow: 5px 8px 15px rgba(74, 42, 19, 0.2);
+      animation: openDoor 1.8s ease-out both;
+    }
+
+    .panel {
+      position: absolute;
+      left: 12%;
+      width: 76%;
+      height: 35%;
+      border: 4px solid #d39a62;
+      border-radius: 4px;
+      box-shadow: inset 0 0 9px rgba(50, 20, 0, 0.25);
+    }
+
+    .panel.top {
+      top: 7%;
+    }
+
+    .panel.bottom {
+      bottom: 7%;
+    }
+
+    .handle {
+      position: absolute;
+      right: 8%;
+      top: 48%;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #ffe18a;
+      box-shadow: 0 0 5px rgba(255, 225, 138, 0.7);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 18px 32px;
+      min-width: 290px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #3985ff, #2467f5);
+      color: #fff;
+      font-size: 19px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 12px 28px rgba(44, 111, 244, 0.2);
+      transition: 0.25s;
+    }
+
+    .button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(44, 111, 244, 0.3);
+    }
+
+    .arrow {
+      font-size: 25px;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #91a3c7;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes openDoor {
+      from {
+        transform: rotateY(0deg);
+      }
+      to {
+        transform: rotateY(-65deg);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 25px 10px;
+      }
+
+      .door-scene {
+        transform: scale(0.85);
+        margin: 15px auto;
+      }
+
+      .button {
+        min-width: 0;
+        width: 100%;
+        max-width: 320px;
+        font-size: 17px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <div class="celebration">🎉</div>
+
+    <h1>The door is open!</h1>
+
+    <p class="description">
+      Well done! You found the right code.<br>
+      Now you can continue your journey.
+    </p>
+
+    <div class="door-scene" aria-label="An open door">
+      <div class="door-frame">
+        <div class="landscape">
+          <div class="sun"></div>
+          <div class="mountains"></div>
+          <div class="path"></div>
+        </div>
+
+        <div class="door">
+          <div class="panel top"></div>
+          <div class="panel bottom"></div>
+          <div class="handle"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ganti tujuan.html dengan nama halaman tujuan -->
+    <a href="home1-mat.html" class="button">
+      <span class="arrow">➜</span>
+      Go to Next Page
+    </a>
+
+    <p class="footer">
+      ✦ A new mystery awaits beyond this door ✦
+    </p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,479 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Games | Home</title>
+
+  <link rel="stylesheet"
+    href="bootstrap-6.0.0-alpha.1-dist/css/bootstrap.min.css">
+  <script
+    src="bootstrap-6.0.0-alpha.1-dist/js/bootstrap.bundle.min.js"
+    defer></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #17233f;
+      background: #f7f9fd;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #111827;
+      padding: 15px 5%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .navbar-brand {
+      color: white !important;
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .brand-icon {
+      color: #7c9cff;
+      margin-right: 7px;
+    }
+
+    .menu-button {
+      color: white;
+      background: #1f2937;
+      border: 1px solid #475569;
+      border-radius: 10px;
+      padding: 7px 12px;
+      font-size: 21px;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 85px 20px 75px;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at top, #dce7ff, transparent 70%),
+        #ffffff;
+      border-bottom: 1px solid #e9edf5;
+    }
+
+    .hero::before {
+      content: "🎮";
+      position: absolute;
+      top: 20px;
+      right: 8%;
+      font-size: 85px;
+      opacity: 0.09;
+      transform: rotate(15deg);
+    }
+
+    .hero::after {
+      content: "✦";
+      position: absolute;
+      bottom: 15px;
+      left: 8%;
+      font-size: 70px;
+      color: #6388ff;
+      opacity: 0.12;
+    }
+
+    .tag {
+      display: inline-block;
+      color: #4267d5;
+      background: #e8eeff;
+      border-radius: 30px;
+      padding: 8px 15px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 68px);
+      font-weight: 850;
+      letter-spacing: -2px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #5578ed;
+    }
+
+    .hero-description {
+      max-width: 620px;
+      margin: 0 auto;
+      color: #68758b;
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn-main,
+    .btn-secondary {
+      display: inline-block;
+      padding: 13px 23px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+      transition: 0.25s;
+    }
+
+    .btn-main {
+      color: white;
+      background: linear-gradient(135deg, #5588ff, #3565e8);
+      box-shadow: 0 8px 20px rgba(53, 101, 232, 0.2);
+    }
+
+    .btn-main:hover {
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(53, 101, 232, 0.3);
+    }
+
+    .btn-secondary {
+      color: #354d82;
+      background: white;
+      border: 1px solid #dce4f3;
+    }
+
+    .btn-secondary:hover {
+      background: #edf2ff;
+      color: #294fc3;
+    }
+
+    /* CONTENT */
+    .content {
+      max-width: 1050px;
+      margin: auto;
+      padding: 55px 22px;
+    }
+
+    .section-label {
+      color: #5578ed;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(27px, 4vw, 36px);
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 16px;
+    }
+
+    .intro-text {
+      color: #6b778c;
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .intro-card {
+      background: white;
+      border: 1px solid #e7ecf5;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 28px rgba(30, 50, 90, 0.045);
+    }
+
+    .joke {
+      margin-top: 23px;
+      padding: 17px 20px;
+      background: #f0f4ff;
+      border-left: 4px solid #6687ff;
+      border-radius: 0 12px 12px 0;
+      color: #52658a;
+      line-height: 1.8;
+    }
+
+    /* CATEGORY GRID */
+    .categories {
+      margin-top: 55px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 25px;
+    }
+
+    .category-card {
+      display: block;
+      padding: 23px 14px;
+      color: #17233f;
+      background: white;
+      border: 1px solid #e7ecf5;
+      border-radius: 16px;
+      text-decoration: none;
+      transition: 0.25s;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      border-color: #b9caff;
+      box-shadow: 0 12px 25px rgba(50, 80, 140, 0.09);
+      color: #4267d5;
+    }
+
+    .category-icon {
+      font-size: 30px;
+      margin-bottom: 13px;
+    }
+
+    .category-card h3 {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    .category-card p {
+      font-size: 12px;
+      line-height: 1.6;
+      color: #8791a5;
+      margin: 0;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 28px 15px;
+      color: #8993a5;
+      background: white;
+      border-top: 1px solid #e6eaf1;
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 65px 20px;
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .content {
+        padding: 35px 16px;
+      }
+
+      .intro-card {
+        padding: 22px;
+      }
+
+      .category-grid {
+        gap: 12px;
+      }
+
+      .category-card {
+        padding: 19px 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-dark">
+    <div class="container-fluid p-0">
+      <a class="navbar-brand" href="home1-mat.html">
+        <span class="brand-icon">✦</span> Games.
+      </a>
+
+      <button
+        class="menu-button"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#gameMenu"
+        aria-controls="gameMenu"
+        aria-label="Open menu">
+        ☰
+      </button>
+    </div>
+  </nav>
+
+  <!-- NAVIGATION DRAWER -->
+  <div class="offcanvas offcanvas-end"
+       tabindex="-1"
+       id="gameMenu"
+       aria-labelledby="menuTitle">
+
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title fw-bold" id="menuTitle">
+        🎮 Explore Games
+      </h5>
+
+      <button type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body">
+      <nav class="nav nav-pills flex-column gap-2">
+        <a class="nav-link active" href="home1-mat.html">🏠 Home</a>
+        <a class="nav-link" href="rpg.html">⚔️ RPG</a>
+        <a class="nav-link" href="idle.html">⌛ Idle</a>
+        <a class="nav-link" href="fps.html">🎯 FPS</a>
+        <a class="nav-link" href="simulator.html">🚗 Simulator</a>
+        <a class="nav-link" href="strategy.html">♟️ Strategy</a>
+        <a class="nav-link" href="puzzle.html">🧩 Puzzle</a>
+        <a class="nav-link" href="boardgame.html">🎲 Board Game</a>
+        <a class="nav-link" href="myfavouritegames.html">
+          💙 My Favourite Games
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- WELCOME -->
+  <header class="hero">
+    <span class="tag">WELCOME TO MY WEBSITE</span>
+
+    <h1>Welcome, <span>Gamer!</span></h1>
+
+    <p class="hero-description">
+      Looking for your next adventure?
+      Discover video games and board games worth playing,
+      recommended by a fellow gamer.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="rpg.html" class="btn-main">
+        Explore Games &nbsp; →
+      </a>
+
+      <a href="myfavouritegames.html" class="btn-secondary">
+        💙 My Favourite Games
+      </a>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <!-- ABOUT -->
+    <section class="intro-card">
+      <div class="section-label">A LITTLE INTRODUCTION</div>
+
+      <h2 class="section-title">So, you passed the test!</h2>
+
+      <p class="intro-text">
+        Haha, you did the test! You are worthy to play games.
+        Just kidding! I was only experimenting with JavaScript's
+        <code>if</code> statement.
+      </p>
+
+      <div class="joke">
+        😄 Don't worry, there are no more secret tests here.
+        Probably. Anyway, welcome to my little gaming corner!
+      </div>
+
+      <p class="intro-text mt-4 mb-0">
+        I made this website to recommend video games and board games.
+        These are some of the games I enjoy, and I hope you discover
+        something new to love, too!
+      </p>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="categories">
+      <div class="section-label">FIND YOUR NEXT GAME</div>
+      <h2 class="section-title">Explore Categories</h2>
+
+      <p class="intro-text">
+        Choose your favourite genre and start your next adventure.
+      </p>
+
+      <div class="category-grid">
+
+        <a class="category-card" href="rpg.html">
+          <div class="category-icon">⚔️</div>
+          <h3>RPG</h3>
+          <p>Epic stories and adventures.</p>
+        </a>
+
+        <a class="category-card" href="fps.html">
+          <div class="category-icon">🎯</div>
+          <h3>FPS</h3>
+          <p>Fast-paced action and aim.</p>
+        </a>
+
+        <a class="category-card" href="strategy.html">
+          <div class="category-icon">♟️</div>
+          <h3>Strategy</h3>
+          <p>Plan your moves and win.</p>
+        </a>
+
+        <a class="category-card" href="puzzle.html">
+          <div class="category-icon">🧩</div>
+          <h3>Puzzle</h3>
+          <p>Test your brain and logic.</p>
+        </a>
+
+        <a class="category-card" href="idle.html">
+          <div class="category-icon">⌛</div>
+          <h3>Idle</h3>
+          <p>Progress at your own pace.</p>
+        </a>
+
+        <a class="category-card" href="simulator.html">
+          <div class="category-icon">🚗</div>
+          <h3>Simulator</h3>
+          <p>Experience different worlds.</p>
+        </a>
+
+        <a class="category-card" href="boardgame.html">
+          <div class="category-icon">🎲</div>
+          <h3>Board Game</h3>
+          <p>Play, think, and compete.</p>
+        </a>
+
+        <a class="category-card" href="myfavouritegames.html">
+          <div class="category-icon">💙</div>
+          <h3>My Favourites</h3>
+          <p>Games I personally recommend.</p>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="mb-1">🎮 Made with passion for games.</p>
+    <p class="mb-0">Thanks for visiting my gaming corner!</p>
+  </footer>
+
+</body>
+</html>

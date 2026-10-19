@@ -1,0 +1,689 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games | Puzzle Collection</title>
+
+  <link rel="stylesheet" href="bootstrap-6.0.0-alpha.1-dist/css/bootstrap.min.css">
+  <script src="bootstrap-6.0.0-alpha.1-dist/js/bootstrap.bundle.min.js" defer></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f5f7fb;
+      color: #172033;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #111827;
+      padding: 16px 5%;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+    }
+
+    .navbar-brand {
+      color: white !important;
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .brand-icon {
+      color: #7c9cff;
+      margin-right: 8px;
+    }
+
+    .menu-button {
+      color: white;
+      border: 1px solid #475569;
+      border-radius: 10px;
+      padding: 8px 12px;
+      background: #1f2937;
+      font-size: 20px;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 65px 20px 55px;
+      text-align: center;
+      background:
+        radial-gradient(circle at top, #e0e9ff, transparent 65%),
+        #fff;
+      border-bottom: 1px solid #e8edf5;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      padding: 7px 14px;
+      background: #e8eeff;
+      color: #4166d5;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 52px);
+      font-weight: 850;
+      letter-spacing: -1.8px;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 span {
+      color: #5578ed;
+    }
+
+    .hero p {
+      max-width: 590px;
+      margin: 0 auto;
+      color: #68758b;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    /* SECTION */
+    .section {
+      max-width: 1250px;
+      margin: auto;
+      padding: 45px 24px 70px;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .section-heading h2 {
+      font-size: 27px;
+      font-weight: 800;
+      margin: 0 0 6px;
+    }
+
+    .section-heading p {
+      color: #788397;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .game-count {
+      background: #e8edfa;
+      color: #5269b6;
+      padding: 7px 12px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* GAME CARDS */
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 25px;
+    }
+
+    .game-card {
+      min-width: 0;
+      overflow: hidden;
+      background: white;
+      border: 1px solid #e9edf4;
+      border-radius: 18px;
+      box-shadow: 0 5px 18px rgba(32,48,80,.045);
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .game-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 16px 35px rgba(32,48,80,.12);
+    }
+
+    .game-image {
+      position: relative;
+      height: 210px;
+      overflow: hidden;
+      background: #e7ebf3;
+    }
+
+    .game-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s;
+    }
+
+    .game-card:hover .game-image img {
+      transform: scale(1.06);
+    }
+
+    .genre {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      padding: 6px 10px;
+      border-radius: 7px;
+      color: white;
+      background: rgba(17,24,39,.82);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      backdrop-filter: blur(8px);
+    }
+
+    .game-body {
+      padding: 21px;
+    }
+
+    .game-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -.4px;
+      margin: 0 0 9px;
+      line-height: 1.4;
+    }
+
+    .game-description {
+      color: #6b778c;
+      font-size: 14px;
+      line-height: 1.75;
+      margin: 0 0 18px;
+      min-height: 98px;
+    }
+
+    .game-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid #edf0f5;
+      padding-top: 15px;
+    }
+
+    .game-type {
+      color: #8791a5;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .details-link {
+      color: #4d6fe6;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .details-link:hover {
+      color: #2748bd;
+      text-decoration: underline;
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 25px 15px;
+      text-align: center;
+      color: #8993a5;
+      font-size: 13px;
+      border-top: 1px solid #e6eaf1;
+      background: white;
+    }
+
+    @media (max-width: 900px) {
+      .game-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .navbar {
+        padding: 14px 18px;
+      }
+
+      .hero {
+        padding: 48px 20px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .section {
+        padding: 32px 16px 45px;
+      }
+
+      .game-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .game-image {
+        height: 230px;
+      }
+
+      .game-description {
+        min-height: auto;
+      }
+
+      .section-heading h2 {
+        font-size: 23px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-dark">
+    <div class="container-fluid p-0">
+      <a class="navbar-brand" href="home1-mat.html">
+        <span class="brand-icon">✦</span> Games.
+      </a>
+
+      <button class="menu-button"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#gameMenu"
+        aria-controls="gameMenu"
+        aria-label="Open menu">
+        ☰
+      </button>
+    </div>
+  </nav>
+
+  <!-- SIDE MENU -->
+  <div class="offcanvas offcanvas-end"
+    tabindex="-1"
+    id="gameMenu"
+    aria-labelledby="menuTitle">
+
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title fw-bold" id="menuTitle">
+        🎮 Explore Games
+      </h5>
+      <button type="button" class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body">
+      <nav class="nav nav-pills flex-column gap-2">
+        <a class="nav-link" href="home1-mat.html">🏠 Home</a>
+        <a class="nav-link" href="rpg.html">⚔️ RPG</a>
+        <a class="nav-link" href="idle.html">⌛ Idle</a>
+        <a class="nav-link" href="fps.html">🎯 FPS</a>
+        <a class="nav-link" href="simulator.html">🚗 Simulator</a>
+        <a class="nav-link" href="strategy.html">♟️ Strategy</a>
+        <a class="nav-link active" href="puzzle.html">🧩 Puzzle</a>
+        <a class="nav-link" href="boardgame.html">🎲 Board Game</a>
+        <a class="nav-link" href="myfavouritegames.html">💙 My Favourite Games</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="hero-tag">THINK • SOLVE • DISCOVER</span>
+
+    <h1>Challenge your mind with <span>Puzzle Games.</span></h1>
+
+    <p>
+      Solve mysteries, explore strange worlds, discover clever
+      mechanics, and test your logic. Every puzzle is a new
+      challenge waiting to be solved. Puzzle games are my top favourite games!
+    </p>
+  </header>
+
+  <!-- GAME COLLECTION -->
+  <main class="section">
+
+    <div class="section-heading">
+      <div>
+        <h2>Puzzle Game Collection</h2>
+        <p>Take your time and solve the mystery.</p>
+      </div>
+      <span class="game-count">14 GAMES</span>
+    </div>
+
+    <div class="game-grid">
+
+      <!-- LAYTON 1 -->
+      <article class="game-card">
+        <div class="game-image">
+          <img src="https://th.bing.com/th/id/R.71d37801cb634c76cd346e643e68b5f6?rik=KuN9KmBM4H4uAQ&riu=http%3a%2f%2foyster.ignimgs.com%2fmediawiki%2fapis.ign.com%2fprofessor-layton-and-the-curious-village%2fc%2fce%2fCurious_village_title.jpg&ehk=VQJGRJ5YTAjkuA9SMhX%2bIljDe5OKVADcecglB8IDOf0%3d&risl=&pid=ImgRaw&r=0"
+            alt="Professor Layton and the Curious Village" loading="lazy">
+          <span class="genre">MYSTERY PUZZLE</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Layton 1: Curious Village</h3>
+          <p class="game-description">
+            Join Professor Layton and Luke as they investigate
+            a mysterious village filled with brain teasers,
+            secrets, and surprising discoveries.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">🔎 Mystery</span>
+            <a class="details-link" href="https://www.layton.jp/"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- LAYTON 2 -->
+      <article class="game-card">
+        <div class="game-image">
+          <img src="https://tse4.mm.bing.net/th/id/OIP.k9AwD1EpCdkWAvqAKpKy4QHaDn?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+            alt="Professor Layton and the Diabolical Box" loading="lazy">
+          <span class="genre">MYSTERY PUZZLE</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Layton 2: Diabolical Box</h3>
+          <p class="game-description">
+            Investigate the mystery of a legendary box and solve
+            a collection of logic puzzles during a curious journey.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">🧩 Logic</span>
+            <a class="details-link" href="https://www.layton.jp/"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- LAYTON 3 -->
+      <article class="game-card">
+        <div class="game-image">
+          <img src="https://static.prod.thinkygames.com/uploads/screenshots/3373d902-f288-4e3a-8ece-e8ffb2c8fa3f/e040ff99-c319-4a00-8a2e-3920a85541df-1280x720.png"
+            alt="Professor Layton and the Unwound Future" loading="lazy">
+          <span class="genre">ADVENTURE PUZZLE</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Layton 3: Unwound Future</h3>
+          <p class="game-description">
+            Follow a mysterious message from the future and
+            uncover secrets through exploration and challenging
+            puzzles.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">🕰️ Adventure</span>
+            <a class="details-link" href="https://www.layton.jp/"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- LAYTON 4 -->
+      <article class="game-card">
+        <div class="game-image">
+          <img src="https://tse2.mm.bing.net/th/id/OIP.npjn_UNzpctt-ZtqoPG1gAHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+            alt="Professor Layton and the Last Specter" loading="lazy">
+          <span class="genre">MYSTERY ADVENTURE</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Layton 4: Last Specter</h3>
+          <p class="game-description">
+            Discover the mystery behind a strange specter and
+            investigate unusual events with Professor Layton.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">👻 Mystery</span>
+            <a class="details-link" href="https://www.layton.jp/"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- LAYTON 5 -->
+      <article class="game-card">
+        <div class="game-image">
+          <img src="https://www.nintendo.com/eu/media/images/11_square_images/games_18/nintendo_3ds_26/SQ_3DS_ProfessorLaytonAndTheMiracleMask_enGB.jpg"
+            alt="Professor Layton and the Miracle Mask" loading="lazy">
+          <span class="genre">3D PUZZLE ADVENTURE</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Layton 5: Miracle Mask</h3>
+          <p class="game-description">
+            Solve puzzles and investigate the mystery of a
+            masked figure connected to a series of strange events.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">🎭 Investigation</span>
+            <a class="details-link" href="https://www.layton.jp/"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- LAYTON 6 -->
+      <article class="game-card">
+        <div class="game-image">
+          <img src="https://tse2.mm.bing.net/th/id/OIP.a8ZskchpWBey2kcrOeD6nQHaD4?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+            alt="Layton's Mystery Journey" loading="lazy">
+          <span class="genre">MYSTERY PUZZLE</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Layton 6: Mystery Journey</h3>
+          <p class="game-description">
+            Follow Katrielle Layton as she investigates unusual
+            cases and solves puzzles throughout London.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">🕵️ Detective</span>
+            <a class="details-link" href="https://www.layton.jp/"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- IQ DUNGEON 1 -->
+      <article class="game-card">
+        <div class="game-image">
+          <img src="https://img.tapimg.net/market/images/8f75fdbcf9f45c8347f8c2ab436bd5c3.png?imageView2/2/w/720/h/720/q/80/format/jpg/interlace/1/ignore-error/1&t=1"
+            alt="IQ Dungeon" loading="lazy">
+          <span class="genre">BRAIN TEASER</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">IQ Dungeon</h3>
+          <p class="game-description">
+            Think outside the box to solve unusual riddles,
+            discover hidden clues, and help characters
+            progress through clever puzzle stages. My favourite.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">🧠 Logic</span>
+            <a class="details-link"
+              href="https://play.google.com/store/search?q=IQ%20Dungeon&c=apps"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- IQ DUNGEON 2 -->
+      <article class="game-card">
+        <div class="game-image">
+          <img src="https://static.wixstatic.com/media/199b18_660110ed2088431fae43764f70e22fee~mv2.png/v1/fill/w_1000,h_1600,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/IQ2_announcement_en_nodate.png"
+            alt="IQ Dungeon 2" loading="lazy">
+          <span class="genre">BRAIN TEASER</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">IQ Dungeon 2</h3>
+          <p class="game-description">
+            Take on more creative riddles and unexpected
+            challenges that require observation, logic,
+            and unconventional thinking. Also my favourite.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">💡 Problem solving</span>
+            <a class="details-link"
+              href="https://play.google.com/store/search?q=IQ%20Dungeon%202&c=apps"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- BABA IS YOU -->
+      <article class="game-card">
+        <div class="game-image">
+          <img src="https://images.launchbox-app.com/cff34086-a36c-45e9-9c72-64889f50f37f.png"
+            alt="Baba Is You" loading="lazy">
+          <span class="genre">LOGIC PUZZLE</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Baba Is You</h3>
+          <p class="game-description">
+            Change the rules of each level by moving word blocks.
+            Experiment with logic and discover creative ways
+            to reach the goal. One of my first puzzle games.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">🔤 Rule changing</span>
+            <a class="details-link"
+              href="https://www.hempuli.com/baba/"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- THE ROOM OLD SINS -->
+      <article class="game-card">
+        <div class="game-image">
+          <img src="https://tse4.mm.bing.net/th/id/OIP.uKP1T3gnAImKcfcIVb_7PAHaEH?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+            alt="The Room Old Sins" loading="lazy">
+          <span class="genre">ESCAPE ROOM</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">The Room: Old Sins</h3>
+          <p class="game-description">
+            Examine mysterious objects, uncover hidden mechanisms,
+            and solve intricate puzzles inside a strange dollhouse.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">🔐 Mystery</span>
+            <a class="details-link"
+              href="https://www.fireproofgames.com/"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- MONUMENT VALLEY -->
+      <article class="game-card">
+        <div class="game-image">
+          <img src="https://www.nintendo.com/eu/media/images/assets/nintendo_switch_games/monumentvalley/2x1_MonumentValley_image1600w.jpg"
+            alt="Monument Valley" loading="lazy">
+          <span class="genre">OPTICAL ILLUSION</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Monument Valley</h3>
+          <p class="game-description">
+            Guide a silent princess through beautiful impossible
+            architecture, rotating structures, and optical
+            illusions to uncover a path forward.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">🏛️ Visual puzzle</span>
+            <a class="details-link"
+              href="https://www.monumentvalleygame.com/"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- CUBE ESCAPE COLLECTION -->
+      <article class="game-card">
+        <div class="game-image">
+          <img src="https://tse2.mm.bing.net/th/id/OIP.j1kC-IQQAv1fpRzQfR59iwHaCe?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+            alt="Cube Escape Collection" loading="lazy">
+          <span class="genre">POINT AND CLICK</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Cube Escape Collection</h3>
+          <p class="game-description">
+            Explore strange rooms, connect mysterious clues,
+            and uncover a surreal story through a collection
+            of atmospheric point-and-click puzzles.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">🗝️ Escape mystery</span>
+            <a class="details-link"
+              href="https://www.rustylake.com/"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- BRAIN IT ON -->
+      <article class="game-card">
+        <div class="game-image">
+          <img src="https://play-lh.googleusercontent.com/xT0g6i8umb672KjaDdGwrwdD-3hFsHF8vA5kK7zLPoXqzDNOHRZAfyrhkFmo2b2BvA0=w526-h296"
+            alt="Brain It On!" loading="lazy">
+          <span class="genre">PHYSICS PUZZLE</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Brain It On!</h3>
+          <p class="game-description">
+            Draw shapes and use physics to solve creative
+            challenges. Many levels have multiple solutions,
+            rewarding experimentation and clever ideas.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">✏️ Physics</span>
+            <a class="details-link"
+              href="https://brainitongame.com/"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- FLOW FREE -->
+      <article class="game-card">
+        <div class="game-image">
+          <img src="https://games.lol/wp-content/uploads/2021/01/flow-free-game.jpg"
+            alt="Flow Free" loading="lazy">
+          <span class="genre">CASUAL LOGIC</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Flow Free</h3>
+          <p class="game-description">
+            Connect matching colored dots across a grid without
+            crossing paths. Plan your routes carefully to
+            complete each puzzle.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">🌈 Connect the dots</span>
+            <a class="details-link"
+              href="https://www.bigduckgames.com/flowfree"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="mb-1">Made for gamers, by a gamer. 🎮</p>
+    <p class="mb-0">Think differently. Solve everything.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,576 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Games | Board Games</title>
+
+  <link rel="stylesheet"
+    href="bootstrap-6.0.0-alpha.1-dist/css/bootstrap.min.css">
+  <script
+    src="bootstrap-6.0.0-alpha.1-dist/js/bootstrap.bundle.min.js"
+    defer></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #17233f;
+      background: #f7f9fd;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #111827;
+      padding: 15px 5%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .navbar-brand {
+      color: white !important;
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .brand-icon {
+      color: #7c9cff;
+      margin-right: 7px;
+    }
+
+    .menu-button {
+      color: white;
+      background: #1f2937;
+      border: 1px solid #475569;
+      border-radius: 10px;
+      padding: 7px 12px;
+      font-size: 21px;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 85px 20px 75px;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at top, #dce7ff, transparent 70%),
+        #ffffff;
+      border-bottom: 1px solid #e9edf5;
+    }
+
+    .hero::before {
+      content: "🎲";
+      position: absolute;
+      top: 20px;
+      right: 8%;
+      font-size: 85px;
+      opacity: 0.09;
+      transform: rotate(15deg);
+    }
+
+    .hero::after {
+      content: "✦";
+      position: absolute;
+      bottom: 15px;
+      left: 8%;
+      font-size: 70px;
+      color: #6388ff;
+      opacity: 0.12;
+    }
+
+    .tag {
+      display: inline-block;
+      color: #4267d5;
+      background: #e8eeff;
+      border-radius: 30px;
+      padding: 8px 15px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 68px);
+      font-weight: 850;
+      letter-spacing: -2px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #5578ed;
+    }
+
+    .hero-description {
+      max-width: 620px;
+      margin: 0 auto;
+      color: #68758b;
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn-main,
+    .btn-secondary {
+      display: inline-block;
+      padding: 13px 23px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+      transition: 0.25s;
+    }
+
+    .btn-main {
+      color: white;
+      background: linear-gradient(135deg, #5588ff, #3565e8);
+      box-shadow: 0 8px 20px rgba(53, 101, 232, 0.2);
+    }
+
+    .btn-main:hover {
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(53, 101, 232, 0.3);
+    }
+
+    .btn-secondary {
+      color: #354d82;
+      background: white;
+      border: 1px solid #dce4f3;
+    }
+
+    .btn-secondary:hover {
+      background: #edf2ff;
+      color: #294fc3;
+    }
+
+    /* CONTENT */
+    .content {
+      max-width: 1100px;
+      margin: auto;
+      padding: 55px 22px;
+    }
+
+    .section-label {
+      color: #5578ed;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(27px, 4vw, 36px);
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 16px;
+    }
+
+    .intro-text {
+      color: #6b778c;
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    /* GAME CARDS */
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 28px;
+    }
+
+    .game-card {
+      overflow: hidden;
+      background: white;
+      border: 1px solid #e7ecf5;
+      border-radius: 18px;
+      box-shadow: 0 8px 28px rgba(30, 50, 90, 0.045);
+      transition: 0.25s;
+    }
+
+    .game-card:hover {
+      transform: translateY(-5px);
+      border-color: #b9caff;
+      box-shadow: 0 12px 25px rgba(50, 80, 140, 0.09);
+    }
+
+    .game-image {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 75px;
+      background:
+        radial-gradient(ellipse at top, #dce7ff, transparent 75%),
+        #f5f7ff;
+      border-bottom: 1px solid #e7ecf5;
+    }
+
+    .game-info {
+      padding: 23px;
+    }
+
+    .game-type {
+      display: inline-block;
+      color: #4267d5;
+      background: #e8eeff;
+      border-radius: 30px;
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-bottom: 13px;
+    }
+
+    .game-info h3 {
+      font-size: 21px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .game-info p {
+      color: #7a869a;
+      font-size: 14px;
+      line-height: 1.8;
+      min-height: 76px;
+    }
+
+    .game-rating {
+      color: #e5a326;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .game-rating span {
+      color: #8791a5;
+      margin-left: 5px;
+    }
+
+    .game-link {
+      display: inline-block;
+      color: #4267d5;
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .game-link:hover {
+      color: #294fc3;
+      text-decoration: underline;
+    }
+
+    .note {
+      margin-top: 35px;
+      padding: 20px;
+      background: #f0f4ff;
+      border-left: 4px solid #6687ff;
+      border-radius: 0 12px 12px 0;
+      color: #52658a;
+      line-height: 1.8;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 28px 15px;
+      color: #8993a5;
+      background: white;
+      border-top: 1px solid #e6eaf1;
+      font-size: 13px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 800px) {
+      .game-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        padding: 65px 20px;
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .content {
+        padding: 35px 16px;
+      }
+
+      .game-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .game-image {
+        height: 210px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-dark">
+    <div class="container-fluid p-0">
+      <a class="navbar-brand" href="home1-mat.html">
+        <span class="brand-icon">✦</span> Games.
+      </a>
+
+      <button
+        class="menu-button"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#gameMenu"
+        aria-controls="gameMenu"
+        aria-label="Open menu">
+        ☰
+      </button>
+    </div>
+  </nav>
+
+  <!-- NAVIGATION DRAWER -->
+  <div class="offcanvas offcanvas-end"
+       tabindex="-1"
+       id="gameMenu"
+       aria-labelledby="menuTitle">
+
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title fw-bold" id="menuTitle">
+        🎮 Explore Games
+      </h5>
+
+      <button type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body">
+      <nav class="nav nav-pills flex-column gap-2">
+        <a class="nav-link" href="home1-mat.html">🏠 Home</a>
+        <a class="nav-link" href="rpg.html">⚔️ RPG</a>
+        <a class="nav-link" href="idle.html">⌛ Idle</a>
+        <a class="nav-link" href="fps.html">🎯 FPS</a>
+        <a class="nav-link" href="simulator.html">🚗 Simulator</a>
+        <a class="nav-link" href="strategy.html">♟️ Strategy</a>
+        <a class="nav-link" href="puzzle.html">🧩 Puzzle</a>
+        <a class="nav-link active" href="boardgame.html">🎲 Board Game</a>
+        <a class="nav-link" href="myfavouritegames.html">
+          💙 My Favourite Games
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="tag">THINK • PLAY • HAVE FUN</span>
+
+    <h1>Board <span>Games.</span></h1>
+
+    <p class="hero-description">
+      Looking for a fun game to play with friends or family?
+      Discover classic board games and exciting card games
+      for your next game night!
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#games" class="btn-main">
+        Explore Board Games &nbsp; →
+      </a>
+
+      <a href="home1-mat.html" class="btn-secondary">
+        🏠 Back to Home
+      </a>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <!-- INTRODUCTION -->
+    <section>
+      <div class="section-label">LET THE GAMES BEGIN</div>
+
+      <h2 class="section-title">Find Your Next Game</h2>
+
+      <p class="intro-text">
+        Whether you enjoy clever strategies, collecting cards,
+        or laughing with friends, there is a game for everyone.
+        Here are five board and card games worth exploring!
+      </p>
+    </section>
+
+    <!-- BOARD GAMES -->
+    <section id="games">
+      <div class="game-grid">
+
+        <!-- CHESS -->
+        <article class="game-card">
+          <div class="game-image">♟️</div>
+
+          <div class="game-info">
+            <span class="game-type">STRATEGY</span>
+
+            <h3>Chess</h3>
+
+            <p>
+              A classic strategy game where every move matters.
+              Plan ahead, protect your king, and outsmart your opponent.
+            </p>
+
+            <div class="game-rating">★★★★★
+              <span>Classic favourite</span>
+            </div>
+
+            <a class="game-link"
+              href="https://www.chess.com/">
+              Explore Chess ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- POKEMON CARDS -->
+        <article class="game-card">
+          <div class="game-image">🃏</div>
+
+          <div class="game-info">
+            <span class="game-type">TRADING CARD GAME</span>
+
+            <h3>Pokémon Cards</h3>
+
+            <p>
+              Collect Pokémon cards, build your deck, and challenge
+              other players with your favourite Pokémon.
+            </p>
+
+            <div class="game-rating">★★★★★
+              <span>Collect & battle</span>
+            </div>
+
+            <a class="game-link"
+              href="https://tcg.pokemon.com/">
+              Explore Pokémon TCG ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- UNSTABLE UNICORNS -->
+        <article class="game-card">
+          <div class="game-image">🦄</div>
+
+          <div class="game-info">
+            <span class="game-type">PARTY CARD GAME</span>
+
+            <h3>Unstable Unicorns</h3>
+
+            <p>
+              Build a unicorn army, use clever cards, and try to
+              stop your friends from getting ahead of you.
+            </p>
+
+            <div class="game-rating">★★★★★
+              <span>Funny & strategic</span>
+            </div>
+
+            <a class="game-link"
+              href="https://unstableunicorns.com/">
+              Explore Unstable Unicorns ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- EXPLODING KITTENS -->
+        <article class="game-card">
+          <div class="game-image">🐱</div>
+
+          <div class="game-info">
+            <span class="game-type">PARTY CARD GAME</span>
+
+            <h3>Exploding Kittens</h3>
+
+            <p>
+              Draw cards, use special abilities, and try to avoid
+              the exploding kitten. A little luck goes a long way!
+            </p>
+
+            <div class="game-rating">★★★★★
+              <span>Great for game night</span>
+            </div>
+
+            <a class="game-link"
+              href="https://www.explodingkittens.com/">
+              Explore Exploding Kittens ↗
+            </a>
+          </div>
+        </article>
+
+        <!-- GUESS WHO -->
+        <article class="game-card">
+          <div class="game-image">🕵️</div>
+
+          <div class="game-info">
+            <span class="game-type">GUESSING GAME</span>
+
+            <h3>Guess Who?</h3>
+
+            <p>
+              Ask yes-or-no questions, eliminate characters,
+              and figure out which character your opponent chose.
+            </p>
+
+            <div class="game-rating">★★★★★
+              <span>Family fun</span>
+            </div>
+
+            <a class="game-link"
+              href="https://shop.hasbro.com/">
+              Explore Hasbro Games ↗
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- GAME NIGHT TIP -->
+    <section class="note">
+      🎲 <strong>Game Night Tip!</strong>
+      Choose Chess if you enjoy strategy, Pokémon Cards if you
+      like collecting, or a party card game if you want to laugh
+      and have fun with friends!
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="mb-1">🎮 Made with passion for games.</p>
+    <p class="mb-0">Thanks for visiting my gaming corner!</p>
+  </footer>
+
+</body>
+</html>

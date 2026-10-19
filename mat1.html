@@ -1,0 +1,290 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATH CHALLENGE</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f5f7ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #1e293b;
+        }
+
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 450px;
+            padding: 40px 30px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(35, 58, 120, 0.10);
+            border: 1px solid #e8edfa;
+            animation: appear 0.6s ease;
+        }
+
+        .icon {
+            width: 75px;
+            height: 75px;
+            background: #eaf0ff;
+            color: #3867f4;
+            border-radius: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 38px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 30px;
+            background: #eef2ff;
+            color: #3867f4;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            color: #172554;
+        }
+
+        .description {
+            color: #7b8499;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .question {
+            margin: 28px 0 20px;
+            background: #f8faff;
+            border: 1px solid #e7edff;
+            border-radius: 18px;
+            padding: 25px 15px;
+        }
+
+        .question-label {
+            color: #8490a8;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .math {
+            font-size: 36px;
+            font-weight: 800;
+            color: #254cc7;
+            letter-spacing: 2px;
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #8992a5;
+            margin: 20px 0 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 55px;
+            resize: none;
+            border: 2px solid #e0e6f2;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 18px;
+            text-align: center;
+            outline: none;
+            transition: 0.25s;
+            color: #172554;
+        }
+
+        textarea:focus {
+            border-color: #3867f4;
+            box-shadow: 0 0 0 4px rgba(56, 103, 244, 0.10);
+        }
+
+        button {
+            width: 100%;
+            margin-top: 16px;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: #3867f4;
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        button:hover {
+            background: #254cc7;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(56, 103, 244, 0.25);
+        }
+
+        #hasil {
+            margin-top: 20px;
+            font-size: 15px;
+            font-weight: 700;
+            min-height: 22px;
+        }
+
+        #next1 {
+            display: none;
+            margin-top: 16px;
+            padding: 14px;
+            border-radius: 12px;
+            background: #e8f9ef;
+            color: #16834a;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        #next1:hover {
+            background: #d4f5e1;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            margin-top: 28px;
+            color: #a0a8ba;
+            font-size: 11px;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 400px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .math {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+
+        <div class="icon">∑</div>
+
+        <span class="tag">LEVEL 01</span>
+
+        <h1>MATH CHALLENGE</h1>
+
+        <p class="description">
+            Test your math skills and solve<br>
+            the question below!
+        </p>
+
+        <div class="question">
+            <p class="question-label">SOLVE THIS QUESTION</p>
+            <div class="math">123 × 56</div>
+        </div>
+
+        <p class="hint">Don't use dots or commas in your answer.</p>
+
+        <textarea
+            name="A"
+            id="A"
+            placeholder="Enter your answer"
+            aria-label="Your answer"
+        ></textarea>
+
+        <button onclick="jawaban()" id="tombol1" type="button">
+            CHECK ANSWER →
+        </button>
+
+        <p id="hasil" role="status" aria-live="polite"></p>
+
+        <a href="mat2.html" id="next1">NEXT LEVEL →</a>
+
+        <p class="footer">MATH CHALLENGE · THINK SMARTER</p>
+
+    </main>
+
+    <script>
+        function jawaban() {
+            const hasil = document.getElementById("hasil");
+            const textarea = document.getElementById("A");
+            const tombol = document.getElementById("tombol1");
+            const next1 = document.getElementById("next1");
+
+            const ans1 = 6888;
+            const jawabanUser = textarea.value.trim();
+
+            if (jawabanUser === "") {
+                hasil.innerText = "Please enter your answer first!";
+                hasil.style.color = "#e59b16";
+                next1.style.display = "none";
+                return;
+            }
+
+            if (/^\d+$/.test(jawabanUser) &&
+                Number(jawabanUser) === ans1) {
+
+                hasil.innerText = "✓ CORRECT! Excellent work!";
+                hasil.style.color = "#16a05d";
+
+                next1.style.display = "block";
+                tombol.innerText = "ANSWER CORRECT ✓";
+                tombol.style.background = "#16a05d";
+
+                textarea.disabled = true;
+                tombol.disabled = true;
+                tombol.style.cursor = "default";
+
+            } else {
+                hasil.innerText = "✗ INCORRECT! Try again.";
+                hasil.style.color = "#e5484d";
+                next1.style.display = "none";
+            }
+        }
+
+        document.getElementById("A").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                jawaban();
+            }
+        });
+    </script>
+</body>
+</html>
+```

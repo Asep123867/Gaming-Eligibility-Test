@@ -1,0 +1,724 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Favourite Games | Games</title>
+
+    <link rel="stylesheet"
+          href="bootstrap-6.0.0-alpha.1-dist/css/bootstrap.min.css">
+
+    <script
+        src="bootstrap-6.0.0-alpha.1-dist/js/bootstrap.bundle.min.js"
+        defer>
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #17233f;
+            background: #f7f9fd;
+        }
+
+        /* NAVBAR — SAME AS HOME */
+        .navbar {
+            background: #111827;
+            padding: 15px 5%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .brand-icon {
+            color: #7c9cff;
+            margin-right: 7px;
+        }
+
+        .menu-button {
+            color: white;
+            background: #1f2937;
+            border: 1px solid #475569;
+            border-radius: 10px;
+            padding: 7px 12px;
+            font-size: 21px;
+            cursor: pointer;
+        }
+
+        .menu-button:hover {
+            background: #334155;
+        }
+
+        /* NAVIGATION DRAWER — SAME AS HOME */
+        .offcanvas {
+            background: white;
+            color: #17233f;
+        }
+
+        .offcanvas-title {
+            color: #17233f;
+        }
+
+        .offcanvas .nav-link {
+            color: #52617a;
+            border-radius: 10px;
+            padding: 12px 14px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .offcanvas .nav-link:hover {
+            background: #edf2ff;
+            color: #4267d5;
+        }
+
+        .offcanvas .nav-link.active {
+            background: #5578ed;
+            color: white;
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 85px 20px 75px;
+            text-align: center;
+            background:
+                radial-gradient(
+                    ellipse at top,
+                    #dce7ff,
+                    transparent 70%
+                ),
+                #ffffff;
+            border-bottom: 1px solid #e9edf5;
+        }
+
+        .hero::before {
+            content: "🎮";
+            position: absolute;
+            top: 20px;
+            right: 8%;
+            font-size: 85px;
+            opacity: 0.09;
+            transform: rotate(15deg);
+        }
+
+        .hero::after {
+            content: "✦";
+            position: absolute;
+            bottom: 15px;
+            left: 8%;
+            font-size: 70px;
+            color: #6388ff;
+            opacity: 0.12;
+        }
+
+        .tag {
+            display: inline-block;
+            color: #4267d5;
+            background: #e8eeff;
+            border-radius: 30px;
+            padding: 8px 15px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 7vw, 65px);
+            font-weight: 850;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #5578ed;
+        }
+
+        .hero-description {
+            max-width: 620px;
+            margin: 0 auto;
+            color: #68758b;
+            font-size: 17px;
+            line-height: 1.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn-main,
+        .btn-secondary {
+            display: inline-block;
+            padding: 13px 23px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 700;
+            transition: 0.25s;
+        }
+
+        .btn-main {
+            color: white;
+            background: linear-gradient(135deg, #5588ff, #3565e8);
+            box-shadow: 0 8px 20px rgba(53, 101, 232, 0.2);
+        }
+
+        .btn-main:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(53, 101, 232, 0.3);
+        }
+
+        .btn-secondary {
+            color: #354d82;
+            background: white;
+            border: 1px solid #dce4f3;
+        }
+
+        .btn-secondary:hover {
+            background: #edf2ff;
+            color: #294fc3;
+        }
+
+        /* RANKING SECTION */
+        .content {
+            max-width: 1000px;
+            margin: auto;
+            padding: 60px 22px 75px;
+        }
+
+        .section-label {
+            color: #5578ed;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(28px, 4vw, 38px);
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            margin-bottom: 15px;
+        }
+
+        .section-description {
+            text-align: center;
+            color: #6b778c;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 35px;
+        }
+
+        .ranking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .game-row {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 19px 21px;
+            background: white;
+            border: 1px solid #e7ecf5;
+            border-radius: 17px;
+            box-shadow: 0 8px 24px rgba(30, 50, 90, 0.035);
+            transition: 0.25s;
+        }
+
+        .game-row:hover {
+            transform: translateY(-4px);
+            border-color: #b9caff;
+            box-shadow: 0 12px 25px rgba(50, 80, 140, 0.09);
+        }
+
+        .rank-number {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
+            background: #edf1ff;
+            color: #5274df;
+            font-size: 18px;
+            font-weight: 850;
+        }
+
+        .game-row:nth-child(1) .rank-number {
+            background: #fff2cc;
+            color: #b78312;
+        }
+
+        .game-row:nth-child(2) .rank-number {
+            background: #edf0f5;
+            color: #68758a;
+        }
+
+        .game-row:nth-child(3) .rank-number {
+            background: #ffeadf;
+            color: #c66b39;
+        }
+
+        .game-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .game-info h3 {
+            color: #17233f;
+            font-size: 18px;
+            font-weight: 800;
+            margin: 0 0 6px;
+        }
+
+        .game-info p {
+            color: #7b879b;
+            font-size: 13px;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .rank-tag {
+            display: inline-block;
+            margin-top: 9px;
+            padding: 5px 10px;
+            border-radius: 30px;
+            background: #edf2ff;
+            color: #5274df;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.7px;
+        }
+
+        .explore-link {
+            flex-shrink: 0;
+            display: inline-block;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: #edf2ff;
+            color: #4267d5;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 800;
+            transition: 0.2s;
+        }
+
+        .explore-link:hover {
+            background: #5578ed;
+            color: white;
+        }
+
+        /* NOTE */
+        .ranking-note {
+            margin-top: 28px;
+            padding: 19px 21px;
+            background: #f0f4ff;
+            border-left: 4px solid #6687ff;
+            border-radius: 0 12px 12px 0;
+            color: #52658a;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .ranking-note strong {
+            color: #354f9d;
+        }
+
+        /* FOOTER — SAME STYLE AS HOME */
+        footer {
+            text-align: center;
+            padding: 28px 15px;
+            color: #8993a5;
+            background: white;
+            border-top: 1px solid #e6eaf1;
+            font-size: 13px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .hero {
+                padding: 65px 20px;
+            }
+
+            .hero h1 {
+                letter-spacing: -1px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .content {
+                padding: 40px 15px 55px;
+            }
+
+            .game-row {
+                gap: 12px;
+                padding: 15px 12px;
+                border-radius: 14px;
+            }
+
+            .rank-number {
+                width: 44px;
+                height: 44px;
+                border-radius: 12px;
+                font-size: 15px;
+            }
+
+            .game-info h3 {
+                font-size: 15px;
+            }
+
+            .game-info p {
+                font-size: 12px;
+            }
+
+            .explore-link {
+                padding: 9px 8px;
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .game-row {
+                flex-wrap: wrap;
+            }
+
+            .game-info {
+                flex-basis: calc(100% - 60px);
+            }
+
+            .explore-link {
+                margin-left: 56px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-dark">
+        <div class="container-fluid p-0">
+            <a class="navbar-brand" href="home1-mat.html">
+                <span class="brand-icon">✦</span> Games.
+            </a>
+
+            <button
+                class="menu-button"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#gameMenu"
+                aria-controls="gameMenu"
+                aria-label="Open menu">
+                ☰
+            </button>
+        </div>
+    </nav>
+
+    <!-- NAVIGATION DRAWER -->
+    <div
+        class="offcanvas offcanvas-end"
+        tabindex="-1"
+        id="gameMenu"
+        aria-labelledby="menuTitle">
+
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold" id="menuTitle">
+                🎮 Explore Games
+            </h5>
+
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close">
+            </button>
+        </div>
+
+        <div class="offcanvas-body">
+            <nav class="nav nav-pills flex-column gap-2">
+                <a class="nav-link" href="home1-mat.html">🏠 Home</a>
+                <a class="nav-link" href="rpg.html">⚔️ RPG</a>
+                <a class="nav-link" href="idle.html">⌛ Idle</a>
+                <a class="nav-link" href="fps.html">🎯 FPS</a>
+                <a class="nav-link" href="simulator.html">🚗 Simulator</a>
+                <a class="nav-link" href="strategy.html">♟️ Strategy</a>
+                <a class="nav-link" href="puzzle.html">🧩 Puzzle</a>
+                <a class="nav-link" href="boardgame.html">🎲 Board Game</a>
+                <a class="nav-link active"
+                   href="myfavouritegames.html"
+                   aria-current="page">
+                    💙 My Favourite Games
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <header class="hero">
+        <span class="tag">PERSONAL GAME RANKING</span>
+
+        <h1>My Favourite <span>Games.</span></h1>
+
+        <p class="hero-description">
+            Every game has its own charm.
+            Discover my personal top twelve games,
+            ranked from my absolute favourite to number twelve.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#rankings" class="btn-main">
+                Explore My Rankings &nbsp; ↓
+            </a>
+
+            <a href="home1-mat.html" class="btn-secondary">
+                🏠 Back to Home
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="content" id="rankings">
+
+        <div class="section-label">MY PERSONAL LIST</div>
+
+        <h2 class="section-title">The Ultimate Ranking</h2>
+
+        <p class="section-description">
+            Twelve games, twelve different adventures.
+            Here are my favourites in order.
+        </p>
+
+        <div class="ranking-list">
+
+            <!-- RANK 1 -->
+            <article class="game-row">
+                <div class="rank-number">🥇 1</div>
+                <div class="game-info">
+                    <h3>Pokémon HeartGold</h3>
+                    <p>An unforgettable Pokémon adventure in the Johto region.</p>
+                    <span class="rank-tag">MY NUMBER ONE</span>
+                </div>
+                <a class="explore-link"
+                   href="https://www.pokemon.com/"
+                   target="_blank" rel="noopener noreferrer">
+                    Explore ↗
+                </a>
+            </article>
+
+            <!-- RANK 2 -->
+            <article class="game-row">
+                <div class="rank-number">🥈 2</div>
+                <div class="game-info">
+                    <h3>Pokémon TCG</h3>
+                    <p>Collect cards, build decks, and enjoy Pokémon battles.</p>
+                    <span class="rank-tag">CARD GAME</span>
+                </div>
+                <a class="explore-link"
+                   href="https://tcg.pokemon.com/"
+                   target="_blank" rel="noopener noreferrer">
+                    Explore ↗
+                </a>
+            </article>
+
+            <!-- RANK 3 -->
+            <article class="game-row">
+                <div class="rank-number">🥉 3</div>
+                <div class="game-info">
+                    <h3>Blox Fruits</h3>
+                    <p>Explore islands, discover powers, and battle enemies.</p>
+                    <span class="rank-tag">ADVENTURE</span>
+                </div>
+                <a class="explore-link"
+                   href="https://www.roblox.com/"
+                   target="_blank" rel="noopener noreferrer">
+                    Explore ↗
+                </a>
+            </article>
+
+            <!-- RANK 4 -->
+            <article class="game-row">
+                <div class="rank-number">4</div>
+                <div class="game-info">
+                    <h3>IQ Dungeon 1–2</h3>
+                    <p>Solve clever puzzles and think outside the box.</p>
+                    <span class="rank-tag">PUZZLE</span>
+                </div>
+                <a class="explore-link"
+                   href="https://play.google.com/store/search?q=IQ%20Dungeon&c=apps"
+                   target="_blank" rel="noopener noreferrer">
+                    Explore ↗
+                </a>
+            </article>
+
+            <!-- RANK 5 -->
+            <article class="game-row">
+                <div class="rank-number">5</div>
+                <div class="game-info">
+                    <h3>Summoners Greed</h3>
+                    <p>Summon monsters and defend your treasure.</p>
+                    <span class="rank-tag">STRATEGY</span>
+                </div>
+                <a class="explore-link"
+                   href="https://play.google.com/store/search?q=Summoners%20Greed&c=apps"
+                   target="_blank" rel="noopener noreferrer">
+                    Explore ↗
+                </a>
+            </article>
+
+            <!-- RANK 6 -->
+            <article class="game-row">
+                <div class="rank-number">6</div>
+                <div class="game-info">
+                    <h3>Dino Bash</h3>
+                    <p>Help dinosaurs protect their eggs from invading cavemen.</p>
+                    <span class="rank-tag">ACTION</span>
+                </div>
+                <a class="explore-link"
+                   href="https://play.google.com/store/search?q=Dino%20Bash&c=apps"
+                   target="_blank" rel="noopener noreferrer">
+                    Explore ↗
+                </a>
+            </article>
+
+            <!-- RANK 7 -->
+            <article class="game-row">
+                <div class="rank-number">7</div>
+                <div class="game-info">
+                    <h3>Roblox Rivals</h3>
+                    <p>Test your aim and compete in fast-paced battles.</p>
+                    <span class="rank-tag">FPS</span>
+                </div>
+                <a class="explore-link"
+                   href="https://www.roblox.com/"
+                   target="_blank" rel="noopener noreferrer">
+                    Explore ↗
+                </a>
+            </article>
+
+            <!-- RANK 8 -->
+            <article class="game-row">
+                <div class="rank-number">8</div>
+                <div class="game-info">
+                    <h3>Kingdom Rush</h3>
+                    <p>Build towers and defend your kingdom from enemy waves.</p>
+                    <span class="rank-tag">TOWER DEFENSE</span>
+                </div>
+                <a class="explore-link"
+                   href="https://www.kingdomrush.com/"
+                   target="_blank" rel="noopener noreferrer">
+                    Explore ↗
+                </a>
+            </article>
+
+            <!-- RANK 9 -->
+            <article class="game-row">
+                <div class="rank-number">9</div>
+                <div class="game-info">
+                    <h3>Professor Layton 1–6</h3>
+                    <p>Uncover mysteries through riddles and challenging puzzles.</p>
+                    <span class="rank-tag">MYSTERY & PUZZLE</span>
+                </div>
+                <a class="explore-link"
+                   href="https://www.layton.jp/"
+                   target="_blank" rel="noopener noreferrer">
+                    Explore ↗
+                </a>
+            </article>
+
+            <!-- RANK 10 -->
+            <article class="game-row">
+                <div class="rank-number">10</div>
+                <div class="game-info">
+                    <h3>Wobbly Life</h3>
+                    <p>Explore a colourful open world full of silly adventures.</p>
+                    <span class="rank-tag">SANDBOX</span>
+                </div>
+                <a class="explore-link"
+                   href="https://www.wobblylife.com/"
+                   target="_blank" rel="noopener noreferrer">
+                    Explore ↗
+                </a>
+            </article>
+
+            <!-- RANK 11 -->
+            <article class="game-row">
+                <div class="rank-number">11</div>
+                <div class="game-info">
+                    <h3>Chess</h3>
+                    <p>Plan your moves, outsmart opponents, and master the board.</p>
+                    <span class="rank-tag">BOARD GAME</span>
+                </div>
+                <a class="explore-link"
+                   href="https://www.chess.com/"
+                   target="_blank" rel="noopener noreferrer">
+                    Explore ↗
+                </a>
+            </article>
+
+            <!-- RANK 12 -->
+            <article class="game-row">
+                <div class="rank-number">12</div>
+                <div class="game-info">
+                    <h3>Overwatch</h3>
+                    <p>Team up with heroes and compete in objective-based battles.</p>
+                    <span class="rank-tag">HERO SHOOTER</span>
+                </div>
+                <a class="explore-link"
+                   href="https://overwatch.blizzard.com/"
+                   target="_blank" rel="noopener noreferrer">
+                    Explore ↗
+                </a>
+            </article>
+
+        </div>
+
+        <!-- NOTE -->
+        <div class="ranking-note">
+            <strong>★ A personal ranking</strong><br>
+            This list represents my own favourite games.
+            Every game has something unique to offer,
+            regardless of its position.
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+    <p class="mb-1">Made for gamers, by a gamer. 🎮</p>
+        <p class="mb-0">Thanks for visiting my gaming corner!</p>
+    </footer>
+
+</body>
+</html>

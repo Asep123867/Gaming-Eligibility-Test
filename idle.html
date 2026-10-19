@@ -1,0 +1,528 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games | Idle Collection</title>
+
+  <link rel="stylesheet" href="bootstrap-6.0.0-alpha.1-dist/css/bootstrap.min.css">
+  <script src="bootstrap-6.0.0-alpha.1-dist/js/bootstrap.bundle.min.js" defer></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f5f7fb;
+      color: #172033;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #111827;
+      padding: 16px 5%;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+    }
+
+    .navbar-brand {
+      color: white !important;
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .brand-icon {
+      color: #7c9cff;
+      margin-right: 8px;
+    }
+
+    .menu-button {
+      color: white;
+      border: 1px solid #475569;
+      border-radius: 10px;
+      padding: 8px 12px;
+      background: #1f2937;
+      font-size: 20px;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 65px 20px 55px;
+      text-align: center;
+      background:
+        radial-gradient(circle at top, #e0e9ff, transparent 65%),
+        #fff;
+      border-bottom: 1px solid #e8edf5;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      padding: 7px 14px;
+      background: #e8eeff;
+      color: #4166d5;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 52px);
+      font-weight: 850;
+      letter-spacing: -1.8px;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 span {
+      color: #5578ed;
+    }
+
+    .hero p {
+      max-width: 570px;
+      margin: 0 auto;
+      color: #68758b;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    /* SECTION */
+    .section {
+      max-width: 1250px;
+      margin: auto;
+      padding: 45px 24px 70px;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .section-heading h2 {
+      font-size: 27px;
+      font-weight: 800;
+      margin: 0 0 6px;
+    }
+
+    .section-heading p {
+      color: #788397;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .game-count {
+      background: #e8edfa;
+      color: #5269b6;
+      padding: 7px 12px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* GAME CARDS */
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 25px;
+    }
+
+    .game-card {
+      min-width: 0;
+      overflow: hidden;
+      background: white;
+      border: 1px solid #e9edf4;
+      border-radius: 18px;
+      box-shadow: 0 5px 18px rgba(32,48,80,.045);
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .game-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 16px 35px rgba(32,48,80,.12);
+    }
+
+    .game-image {
+      position: relative;
+      height: 210px;
+      overflow: hidden;
+      background: #e7ebf3;
+    }
+
+    .game-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s;
+    }
+
+    .game-card:hover .game-image img {
+      transform: scale(1.06);
+    }
+
+    .genre {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      padding: 6px 10px;
+      border-radius: 7px;
+      color: white;
+      background: rgba(17,24,39,.82);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      backdrop-filter: blur(8px);
+    }
+
+    .game-body {
+      padding: 21px;
+    }
+
+    .game-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -.4px;
+      margin: 0 0 9px;
+      line-height: 1.4;
+    }
+
+    .game-description {
+      color: #6b778c;
+      font-size: 14px;
+      line-height: 1.75;
+      margin: 0 0 18px;
+      min-height: 98px;
+    }
+
+    .game-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid #edf0f5;
+      padding-top: 15px;
+    }
+
+    .game-type {
+      color: #8791a5;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .details-link {
+      color: #4d6fe6;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .details-link:hover {
+      color: #2748bd;
+      text-decoration: underline;
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 25px 15px;
+      text-align: center;
+      color: #8993a5;
+      font-size: 13px;
+      border-top: 1px solid #e6eaf1;
+      background: white;
+    }
+
+    @media (max-width: 900px) {
+      .game-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .navbar {
+        padding: 14px 18px;
+      }
+
+      .hero {
+        padding: 48px 20px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .section {
+        padding: 32px 16px 45px;
+      }
+
+      .game-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .game-image {
+        height: 230px;
+      }
+
+      .game-description {
+        min-height: auto;
+      }
+
+      .section-heading h2 {
+        font-size: 23px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-dark">
+    <div class="container-fluid p-0">
+      <a class="navbar-brand" href="home1-mat.html">
+        <span class="brand-icon">✦</span> Games.
+      </a>
+
+      <button class="menu-button"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#gameMenu"
+        aria-controls="gameMenu"
+        aria-label="Open menu">
+        ☰
+      </button>
+    </div>
+  </nav>
+
+  <!-- SIDE MENU -->
+  <div class="offcanvas offcanvas-end"
+    tabindex="-1"
+    id="gameMenu"
+    aria-labelledby="menuTitle">
+
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title fw-bold" id="menuTitle">
+        🎮 Explore Games
+      </h5>
+      <button type="button" class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body">
+      <nav class="nav nav-pills flex-column gap-2">
+        <a class="nav-link" href="home1-mat.html">🏠 Home</a>
+        <a class="nav-link" href="rpg.html">⚔️ RPG</a>
+        <a class="nav-link active" href="idle.html">⌛ Idle</a>
+        <a class="nav-link" href="fps.html">🎯 FPS</a>
+        <a class="nav-link" href="simulator.html">🚗 Simulator</a>
+        <a class="nav-link" href="strategy.html">♟️ Strategy</a>
+        <a class="nav-link" href="puzzle.html">🧩 Puzzle</a>
+        <a class="nav-link" href="boardgame.html">🎲 Board Game</a>
+        <a class="nav-link" href="myfavouritegames.html">💙 My Favourite Games</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="hero-tag">RELAX • UPGRADE • REPEAT</span>
+
+    <h1>Discover the world of <span>Idle Games.</span></h1>
+
+    <p>
+      Build your empire, upgrade your heroes, collect rewards,
+      and keep progressing even when you're away.
+      Here are six idle games worth checking out!
+    </p>
+  </header>
+
+  <!-- GAME COLLECTION -->
+  <main class="section">
+
+    <div class="section-heading">
+      <div>
+        <h2>Idle Game Collection</h2>
+        <p>Small steps, bigger progress.</p>
+      </div>
+      <span class="game-count">6 GAMES</span>
+    </div>
+
+    <div class="game-grid">
+
+      <!-- SUMMONERS GREED -->
+      <article class="game-card">
+        <div class="game-image">
+          <img
+            src="https://games.lol/wp-content/uploads/2021/04/summoners-greed-pc-full-version.jpg"
+            alt="Summoners Greed"
+            loading="lazy">
+          <span class="genre">IDLE TOWER DEFENSE</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Summoners Greed</h3>
+          <p class="game-description">
+            Summon monsters, build your defense, and upgrade your
+            team to stop waves of enemies. Perfect for players who
+            enjoy collecting creatures and strategic tower defense.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">👾 Monster collecting</span>
+            <a class="details-link"
+              href="https://play.google.com/store/search?q=Summoners%20Greed&c=apps"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- GROW CASTLE -->
+      <article class="game-card">
+        <div class="game-image">
+          <img
+            src="https://didongviet.vn/dchannel/wp-content/uploads/2023/07/grow-castle-bia-didongviet.jpg"
+            alt="Grow Castle"
+            loading="lazy">
+          <span class="genre">IDLE DEFENSE</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Grow Castle</h3>
+          <p class="game-description">
+            Defend your castle against incoming enemies, recruit
+            heroes, improve your towers, and strengthen your
+            defenses as the waves get tougher.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">🏰 Castle defense</span>
+            <a class="details-link"
+              href="https://play.google.com/store/search?q=Grow%20Castle&c=apps"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- AFK JOURNEY -->
+      <article class="game-card">
+        <div class="game-image">
+          <img
+            src="https://i.ytimg.com/vi/0GfvVr72QQ8/maxresdefault.jpg"
+            alt="AFK Journey"
+            loading="lazy">
+          <span class="genre">AFK FANTASY RPG</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">AFK Journey</h3>
+          <p class="game-description">
+            Explore the magical world of Esperia, collect heroes,
+            build a balanced team, and enjoy strategic battles
+            alongside idle progression.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">🧙 Fantasy adventure</span>
+            <a class="details-link"
+              href="https://afkjourney.farlightgames.com/"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- LEGEND OF SLIME -->
+      <article class="game-card">
+        <div class="game-image">
+          <img
+            src="https://mumu-global.fp.ps.easebar.com/file/6304af5dd448e3315ad071afI1lXHdiH03"
+            alt="Legend of Slime"
+            loading="lazy">
+          <span class="genre">IDLE RPG</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Legend of Slime: Idle RPG</h3>
+          <p class="game-description">
+            Lead a slime clan, collect companions, improve your
+            abilities, and battle enemies with automatic combat
+            and rewards while you're away.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">🟢 Slime adventure</span>
+            <a class="details-link"
+              href="https://play.google.com/store/apps/details?id=com.loadcomplete.slimeidle"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- MELVOR IDLE -->
+      <article class="game-card">
+        <div class="game-image">
+          <img
+            src="https://sm.ign.com/t/ign_hu/cover/m/melvor-idl/melvor-idle_t491.1200.jpg"
+            alt="Melvor Idle"
+            loading="lazy">
+          <span class="genre">IDLE ADVENTURE RPG</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Melvor Idle</h3>
+          <p class="game-description">
+            Train skills, gather resources, craft equipment,
+            and take on monsters. Inspired by classic RPG
+            progression, with plenty of systems to master.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">⚒️ Skills & crafting</span>
+            <a class="details-link"
+              href="https://store.steampowered.com/app/1267910/Melvor_Idle/"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- IDLE MINER TYCOON -->
+      <article class="game-card">
+        <div class="game-image">
+          <img
+            src="https://cdn.nichesites.pikoya.com/virtualworldsland_com/images/games/13072/gallery/40666.jpg"
+            alt="Idle Miner Tycoon"
+            loading="lazy">
+          <span class="genre">IDLE TYCOON</span>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Idle Miner Tycoon</h3>
+          <p class="game-description">
+            Manage mines, hire managers, automate production,
+            and expand your mining business into an empire
+            that continues earning money over time.
+          </p>
+          <div class="game-footer">
+            <span class="game-type">⛏️ Mining & management</span>
+            <a class="details-link"
+              href="https://www.idleminertycoon.com/"
+              target="_blank" rel="noopener noreferrer">Explore ↗</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="mb-1">Made for gamers, by a gamer. 🎮</p>
+    <p class="mb-0">Discover your next favorite idle game.</p>
+  </footer>
+
+</body>
+</html>
